@@ -1,3 +1,22 @@
+<?php
+include("log.php");
+
+session_start();
+include("sve.php");
+    $mysqli = new mysqli("localhost","root","","appsz");
+    $id= $_SESSION["id"];
+    $check = $mysqli->query("SELECT data FROM users WHERE email = '$id'");
+    if($check -> num_rows == 1){
+        while($row = $check->fetch_assoc()) {
+            if($row["data"]!=null){
+                $data=$row["data"];
+                setcookie("dataa",$data );
+            }
+        }
+    }
+    
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,23 +37,62 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="finalPageStyle.css">
-    <script src="script.js" defer></script>
+
+    
 </head>
 
 <body>
+
     
-
-
+    
         <div class="nav-bar">
             <img src="fav/android-chrome-256x256.png" alt="">
             <p id="title">ColorSet</p>
-
             <div class="aDiv" id="aDiv">
                 <!--<img id="avatar">-->
             </div>
+            <a  href="logout.php" onclick="saverF()" class="nav-menu"  style="float:right; color: var(--mainTextColor);text-decoration:none;margin-right:20px;">logout</a>
+            
+    <form method="post" >
+            <!--<a  onclick="saverF()" class="nav-menu" style="float:right; color: var(--mainTextColor);text-decoration:none;margin-right:20px; cursor:pointer;">save</a>-->
+            <button type="submit" name="sv" onclick="saverF()" class="nav-menu" style="margin-top:20px;border:none;font-size:16px;background-color:initial;float:right; color: var(--mainTextColor);text-decoration:none;margin-right:20px; cursor:pointer;">save</button>
+            </form>
+
         </div>
 
+        <!--<script src="script.js" ></script>-->
+        <script type="text/javascript">
 
+
+function generateAvatar(text, foregroundColor, backgroundColor) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = 50;
+    canvas.height = 50;
+
+
+    context.fillStyle = backgroundColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+
+    context.font = "bold 25px Space Mono";
+    context.fillStyle = foregroundColor;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(text, canvas.width / 2, canvas.height / 2 + 2);
+
+    return canvas.toDataURL("image/png");
+}
+tlet='<?php echo $_SESSION['user'];?>';
+tle=tlet.slice(0, 2)
+document.getElementById("aDiv").style.backgroundImage="url("+generateAvatar(tle.toUpperCase(),"white","black")+")"
+
+
+
+
+
+    </script>
 
             <div class="main-box">
                 <div class="color-editor">
@@ -98,8 +156,9 @@
 
     
     
-    <script src="appWork.js"></script>
-
+    
+    <!--<script src="appWork.js"></script>-->
+<script src="appWork.js"></script>
 
 </body>
 </html>

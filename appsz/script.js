@@ -1,3 +1,4 @@
+
 function generateAvatar(text, foregroundColor, backgroundColor) {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
@@ -5,11 +6,11 @@ function generateAvatar(text, foregroundColor, backgroundColor) {
     canvas.width = 50;
     canvas.height = 50;
 
-    // Draw background
+
     context.fillStyle = backgroundColor;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw text
+
     context.font = "bold 25px Roboto";
     context.fillStyle = foregroundColor;
     context.textAlign = "center";
@@ -18,9 +19,10 @@ function generateAvatar(text, foregroundColor, backgroundColor) {
 
     return canvas.toDataURL("image/png");
 }
-//console.log(generateAvatar("Ka","white","black"))
+tlet='<?php echo $_SESSION[\'user\'];?>';
+console.log("dsa")
+//tle=tlet.slice(0, 2)
+document.getElementById("aDiv").style.backgroundImage="url("+generateAvatar("os","white","black")+")"
 
-document.getElementById("aDiv").style.backgroundImage="url("+generateAvatar("Ka","white","black")+")"
 
-//navigator.clipboard.writeText(copyText.value);
 

@@ -66,8 +66,81 @@ for(i =1;i<=5;i++){
         //console.log(document.getElementById(id))
     }
 }
-
+/*
+localStorage.setItem("lastname", "Smith");
+localStorage.getItem("lastname");
+var jQueryScript = document.createElement('script');  
+jQueryScript.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js');
+document.head.appendChild(jQueryScript);
+*/
 lists={}
+/*
+addEventListener('beforeunload', (event) => {
+    document.cookie="dataa="+JSON.stringify(lists);
+    localStorage.clear();
+    localStorage.setItem("data", JSON.stringify(lists));
+ });
+
+ window.addEventListener("load", (event) => {
+
+    try{
+    if(JSON.parse(localStorage.getItem("data")).constructor == Object) {
+        lists=JSON.parse(localStorage.getItem("data"))
+    }
+    }   catch(error){
+        console.log(error)
+    }
+  });
+*/
+loadD=()=>{
+    
+}
+
+saverF=()=>{
+    //document.cookie = "dsa=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie="dataa="+JSON.stringify(lists);
+
+    /*list=lists
+    lists={}
+    
+
+    for (const [key, value] of Object.entries(list)) {
+        drawList(key)
+        for(i=0 ;i<=value.length; i++){
+            addColor(key,value[1])
+        }
+        //console.log(key, value);
+    }
+    list={}*/
+    // for (let i in list) {
+    //     createList()
+    //     for (i=0;i<=list[i];i++) {
+    //         addColor(id,col)
+    //     }
+    // }
+}
+
+
+drawList=(id)=>{
+    const lista = document.createElement("div");
+    lista.className="lista"
+
+    lista.setAttribute("id",id)
+    lista.innerHTML=
+    
+    "<div class=\"trash\" onclick=\"trash(this)\"><span class=\"material-symbols-outlined\">delete</span></div>"+"<div class=\"addColorButton\" onclick=\"addColorToList("+idList+")\" >Add color   <span class=\"material-symbols-outlined\" >add</span></div>"
+
+    
+    document.getElementById('letters').appendChild(lista)
+        
+    
+    
+    lists[id]=[]
+
+
+}
+
+
 
 addColor=(id,col)=>{
     const bb = document.createElement("div");
@@ -84,8 +157,7 @@ addColor=(id,col)=>{
 }
 
 deleteColor=(th)=>{
-    //console.log(th.parentElement.parentElement.id)
-    
+
     for(i=0;i<=lists[th.parentElement.parentElement.id].length;i++){
         console.log(lists[th.parentElement.parentElement.id][i][0])
         if(lists[th.parentElement.parentElement.id][i][0]==th.parentElement.id){
@@ -127,3 +199,4 @@ trash=(th)=>{
     delete lists[th.parentElement.id]
     document.getElementById(th.parentElement.id).remove()
 }
+

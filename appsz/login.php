@@ -1,3 +1,10 @@
+<?php
+include("log.php");
+session_start();
+if(isset($_SESSION["user"])){
+    header('Location: finalPage.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,29 +42,7 @@
         </form>
     </div>
 
-    <?php
     
-    if (isset($_POST["login"]))
-    {
-        $email = $_POST["email"];
-        $vcode = $_POST["verification_code"];
-
-        $mysqli = new mysqli("localhost","root","","appsz");
-        $check = $mysqli->query("SELECT verification_code FROM users WHERE email = '$email'");
-        if($check -> num_rows == 1){
-            while($row = $check->fetch_assoc()) {
-                if($row["verification_code"]==$vcode){
-                    $mysqli->query("update users set verification_code='con' where email='".$email."'");
-                    header("Location: cop.php");
-                }
-            }
-        }
-
-
-        exit();
-    }
-
-    ?>
 
 </body>
 </html>
