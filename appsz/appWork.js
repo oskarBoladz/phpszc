@@ -1,3 +1,5 @@
+
+
 copyData=(data)=>{
     navigator.clipboard.writeText(data);
 }
@@ -74,6 +76,7 @@ jQueryScript.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jquery/3.
 document.head.appendChild(jQueryScript);
 */
 lists={}
+
 /*
 addEventListener('beforeunload', (event) => {
     document.cookie="dataa="+JSON.stringify(lists);
@@ -92,12 +95,29 @@ addEventListener('beforeunload', (event) => {
     }
   });
 */
-loadD=()=>{
-    
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
+
+
+
+
 
 saverF=()=>{
     //document.cookie = "dsa=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
     document.cookie="dataa="+JSON.stringify(lists);
 
     /*list=lists
