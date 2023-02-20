@@ -195,7 +195,17 @@ document.getElementById("aDiv").style.backgroundImage="url("+generateAvatar(tle.
         success: function(data){                    
             //$("#letters").html(data)
             document.cookie="dataa="+JSON.stringify(data);
-        }
+            console.log(data)
+            //lists=Object.assign({}, k) 
+            lists=jQuery.parseJSON(data)
+                all=Object.assign({}, lists) 
+                console.log(all)
+            
+                loadData()
+            }
+            
+            
+        })
     });
 
     $("#fform").submit(function(e){
@@ -209,16 +219,30 @@ document.getElementById("aDiv").style.backgroundImage="url("+generateAvatar(tle.
                 $("#letters").html(resp);
             }
 
-         });         
+        });         
 
     })
-})
+
 
 
 loadData=()=>{
 // tu kurwa programuj
+
+for (let k in lists) {
+
+    drawList(k)
+    console.log(lists)
+    for(let j in lists[k]){
+        
+        console.log(k,j,lists[k][j])
+        addColori(k,j,lists[k][j])
+    }   
+
+
 }
-loadData()
+
+}
+
 
 copyData=(data)=>{
     navigator.clipboard.writeText(data);
@@ -227,7 +251,7 @@ curentColor=[255,255,255]
 
 hD=document.getElementById("hexData")
 rD=document.getElementById("rgbData")
-hsD=document.getElementById("rgbData")
+hsD=document.getElementById("hslData")
 
 circle=document.getElementById("mainColorCircle")
 
@@ -337,7 +361,7 @@ function getCookie(cname) {
 
 saverF=()=>{
     //document.cookie = "dsa=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    
+
     document.cookie="dataa="+JSON.stringify(lists);
 
     /*list=lists
@@ -368,43 +392,63 @@ drawList=(id)=>{
     lista.setAttribute("id",id)
     lista.innerHTML=
     
-    "<div class=\"trash\" onclick=\"trash(this)\"><span class=\"material-symbols-outlined\">delete</span></div>"+"<div class=\"addColorButton\" onclick=\"addColorToList("+idList+")\" >Add color   <span class=\"material-symbols-outlined\" >add</span></div>"
+    "<div class=\"trash\" onclick=\"trash(this)\"><span class=\"material-symbols-outlined\">delete</span></div>"+"<div class=\"addColorButton\" onclick=\"addColorToList("+id+")\" >Add color   <span class=\"material-symbols-outlined\" >add</span></div>"
 
     
     document.getElementById('letters').appendChild(lista)
         
     
     
-    lists[id]=[]
+    //lists[id]={}
 
 
 }
 
+addColori=(id,idC,col)=>{
+    const bb = document.createElement("div");
+    bb.className="listaE"  
 
+    bb.setAttribute("id",idC)
+    bb.setAttribute("cv",col)
+    bb.innerHTML="<div class=\"delete\" onclick=\"deleteColor(this)\"><span class=\"material-symbols-outlined\" >close</span></div>"
+    bb.style.backgroundColor=col
+    document.getElementById(id).appendChild(bb)
+
+    return bb;
+}
 
 addColor=(id,col)=>{
     const bb = document.createElement("div");
     bb.className="listaE"  
     //console.log(id)
-    idl=lists[id].length+1+id
+    idl=Object.keys(lists[id]).length+1+id
     bb.setAttribute("id",idl)
     bb.setAttribute("cv","rgb("+curentColor[0]+","+curentColor[1]+","+curentColor[2]+")")
     bb.innerHTML="<div class=\"delete\" onclick=\"deleteColor(this)\"><span class=\"material-symbols-outlined\" >close</span></div>"
     bb.style.backgroundColor="rgb("+curentColor[0]+","+curentColor[1]+","+curentColor[2]+")"
     document.getElementById(id).appendChild(bb)
-    lists[id].push([idl,"rgb("+curentColor[0]+","+curentColor[1]+","+curentColor[2]+")"])
+    lists[id][idl]="rgb("+curentColor[0]+","+curentColor[1]+","+curentColor[2]+")"
     return bb;
 }
 
 deleteColor=(th)=>{
 
-    for(i=0;i<=lists[th.parentElement.parentElement.id].length;i++){
-        console.log(lists[th.parentElement.parentElement.id][i][0])
-        if(lists[th.parentElement.parentElement.id][i][0]==th.parentElement.id){
-            lists[th.parentElement.parentElement.id].splice(i,1)
+    // for(i=0;i<=lists[th.parentElement.parentElement.id].length;i++){
+    //     //console.log(lists[th.parentElement.parentElement.id][i][0])
+    //     if(lists[th.parentElement.parentElement.id][i]==th.parentElement.id){
+    //         lists[th.parentElement.parentElement.id].splice(i,1)
+    //         lists[th.parentElement.parentElement.id].splice(i,1)
+    //         document.getElementById(th.parentElement.id).remove()
+    //         break;
+    //     }
+    // }
+    for(let k in lists[th.parentElement.parentElement.id]){
+        if(k==th.parentElement.id){
+            delete lists[th.parentElement.parentElement.id][k]
             document.getElementById(th.parentElement.id).remove()
             break;
         }
+        
     }
     
 }
@@ -429,7 +473,7 @@ createList=()=>{
         
     
     
-    lists[idList]=[]
+    lists[idList]={}
     addColor(idList,curentColor)
 
 }
@@ -445,7 +489,7 @@ trash=(th)=>{
 
 
 </script>
-<script type="text/javascript" src="appWork.js"></script>
+<!--<script type="text/javascript" src="appWork.js"></script>-->
 
 </body>
 </html>

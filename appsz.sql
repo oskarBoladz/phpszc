@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Lut 2023, 22:49
+-- Czas generowania: 20 Lut 2023, 22:27
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `pass`, `email`, `data`, `verification_code`) VALUES
-(1, 'oskar', 'SH182h4tmHlDA', 'oskar.boladz@wp.pl', NULL, 'con');
+(1, 'oskar', 'SH182h4tmHlDA', 'oskar.boladz@wp.pl', '{\"lis1\":{\"1lis1\":\"rgb(255,255,255)\",\"2lis1\":\"rgb(255,140,101)\"},\"lis2\":{\"1lis2\":\"rgb(255,255,101)\",\"2lis2\":\"rgb(255,140,101)\"}}', 'con');
 
 --
 -- Indeksy dla zrzutów tabel
